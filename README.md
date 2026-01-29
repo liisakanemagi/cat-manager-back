@@ -1,16 +1,3 @@
-# BMX Estonia - Vali IT! Final Project (Backend)
-
-**Frontend Repository:** https://github.com/liisakanemagi/bmxfront
-
-This repository contains the backend **RESTful API** for the BMX Estonia community platform. It is built using **Java** and **Spring Boot**, serving data to the Vue.js frontend application.
-
-**Project Type:** Educational capstone project for the Vali IT! retraining program.
-
-## Project Status: Work in Progress
-
-> **Note:** This project is currently under development. While the core API endpoints are functional, some features are simplified or pending implementation.
-
-## Tech Stack
 
 **Core Frameworks:**
 * **Java**

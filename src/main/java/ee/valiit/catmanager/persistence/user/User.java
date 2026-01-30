@@ -19,7 +19,7 @@ public class User {
 
     @Size(max = 50)
     @NotNull
-    @Column(name = "username", nullable = false, length = 50)
+    @Column(name = "username", nullable = false)
     private String username;
 
     @Size(max = 255)
@@ -28,7 +28,7 @@ public class User {
     private String password;
 
     @Size(max = 100)
-    @Column(name = "email", length = 100)
+    @Column(name = "email")
     private String email;
 
 }

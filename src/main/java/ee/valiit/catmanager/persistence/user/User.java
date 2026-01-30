@@ -31,4 +31,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "role", nullable = false)
+    private String role;
+
 }

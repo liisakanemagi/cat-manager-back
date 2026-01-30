@@ -7,6 +7,7 @@ import org.mapstruct.*;
 public interface UserMapper {
 
     @Mapping(source = "id", target = "userId")
+    @Mapping(source = "role", target = "userRole")
     LoginResponse toLoginResponse (User user);
 
 }

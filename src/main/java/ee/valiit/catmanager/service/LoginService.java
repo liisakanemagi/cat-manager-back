@@ -7,6 +7,7 @@ import ee.valiit.catmanager.persistence.user.User;
 import ee.valiit.catmanager.persistence.user.UserMapper;
 import ee.valiit.catmanager.persistence.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,10 +16,16 @@ public class LoginService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public LoginResponse login (String username, String password){
-        User user = userRepository.findUsersBy(username, password)
+        User user = userRepository.findUsersByUsername(username)
                 .orElseThrow(() -> new ForbiddenException(Error.INCORRECT_CREDENTIALS.getMessage(), Error.INCORRECT_CREDENTIALS.getErrorCode()));
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new ForbiddenException(Error.INCORRECT_CREDENTIALS.getMessage(), Error.INCORRECT_CREDENTIALS.getErrorCode());
+        }
+
         return userMapper.toLoginResponse(user);
     }
 

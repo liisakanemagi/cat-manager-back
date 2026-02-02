@@ -16,8 +16,8 @@ public class RegisterController {
 
     @PostMapping("/register")
 
-    public void register (@RequestBody @Valid UserInfo userInfo){
-        registerService.register(userInfo);
+    public Integer register (@RequestBody @Valid UserInfo userInfo){
+        return registerService.register(userInfo);
     }
 
 }

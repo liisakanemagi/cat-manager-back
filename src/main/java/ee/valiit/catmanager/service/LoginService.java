@@ -1,6 +1,6 @@
 package ee.valiit.catmanager.service;
 
-import ee.valiit.catmanager.controller.LoginResponse;
+import ee.valiit.catmanager.controller.login.LoginResponse;
 import ee.valiit.catmanager.infrastructure.error.Error;
 import ee.valiit.catmanager.infrastructure.exception.ForbiddenException;
 import ee.valiit.catmanager.infrastructure.security.JwtService;

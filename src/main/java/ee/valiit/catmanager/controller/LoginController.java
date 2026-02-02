@@ -8,8 +8,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,8 +18,8 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @GetMapping("/login")
-    @Operation(summary = "Sisse logimine. Tagastab userId ja userRole",
+    @PostMapping("/login")
+    @Operation(summary = "Sisse logimine. Tagastab userId, userRole ja tokeni",
             description = """
                     Süsteemist otsitakse username ja password abil kasutajat.
                     Kui vastet ei leita vistakse viga errorCode'ga 111""")
@@ -27,7 +27,7 @@ public class LoginController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "403", description = "Vale kasutajanimi või parool", content = @Content(schema = @Schema(implementation = ApiError.class)))})
 
-    public LoginResponse login (@RequestParam String username, @RequestParam String password) {
-        return loginService.login(username, password);
+    public LoginResponse login (@RequestBody LoginRequest loginRequest) {
+        return loginService.login(loginRequest.getUsername(), loginRequest.getPassword());
     }
 }

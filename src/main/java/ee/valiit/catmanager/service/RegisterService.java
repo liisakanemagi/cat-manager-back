@@ -7,7 +7,6 @@ import ee.valiit.catmanager.persistence.user.User;
 import ee.valiit.catmanager.persistence.user.UserMapper;
 import ee.valiit.catmanager.persistence.user.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,12 +17,12 @@ public class RegisterService {
     private final UserMapper userMapper;
 
     public Integer register (UserInfo userInfo){
-        boolean usernameExists = userRepository.userExistsByUsername(userInfo.getUsername());
+        boolean usernameExists = userRepository.existsByUsername(userInfo.getUsername());
 
         if(usernameExists) {
             throw new ForbiddenException(Error.USERNAME_ALREADY_EXISTS.getMessage(), Error.USERNAME_ALREADY_EXISTS.getErrorCode());
         }
-        boolean emailExists = userRepository.userExistsByEmail(userInfo.getEmail());
+        boolean emailExists = userRepository.existsByEmail(userInfo.getEmail());
         if (emailExists){
             throw new ForbiddenException(Error.EMAIL_ALREADY_EXISTS.getMessage(), Error.EMAIL_ALREADY_EXISTS.getErrorCode());
         }

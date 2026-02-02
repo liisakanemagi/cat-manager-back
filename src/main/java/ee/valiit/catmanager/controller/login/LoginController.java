@@ -1,4 +1,4 @@
-package ee.valiit.catmanager.controller;
+package ee.valiit.catmanager.controller.login;
 
 import ee.valiit.catmanager.infrastructure.error.ApiError;
 import ee.valiit.catmanager.service.LoginService;

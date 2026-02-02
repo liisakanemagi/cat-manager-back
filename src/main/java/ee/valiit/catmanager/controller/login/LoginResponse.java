@@ -1,4 +1,4 @@
-package ee.valiit.catmanager.controller;
+package ee.valiit.catmanager.controller.login;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

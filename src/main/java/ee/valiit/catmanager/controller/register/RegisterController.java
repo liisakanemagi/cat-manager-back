@@ -18,6 +18,7 @@ public class RegisterController {
 
     public Integer register (@RequestBody @Valid UserInfo userInfo){
         return registerService.register(userInfo);
+
     }
 
 }

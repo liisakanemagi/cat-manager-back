@@ -10,10 +10,7 @@ public interface UserMapper {
     @Mapping(source = "id", target = "userId")
     @Mapping(source = "role", target = "userRole")
     LoginResponse toLoginResponse (User user);
-    
-    @Mapping(source = "email",target = "email")
-    @Mapping(source = "password",target = "password")
-    @Mapping(source = "username",target = "username")
+
     User toUser(UserInfo userInfo);
 
 }

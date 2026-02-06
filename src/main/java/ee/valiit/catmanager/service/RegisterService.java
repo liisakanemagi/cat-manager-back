@@ -19,18 +19,14 @@ public class RegisterService {
     private final PasswordEncoder passwordEncoder;
 
     public Integer register (UserInfo userInfo){
-
         validateUsernameIsAvailable(userInfo);
-
         validateEmailIsAvailable(userInfo);
-
         User user = createAndSaveUser(userInfo);
         return user.getId();
     }
 
     private void validateUsernameIsAvailable(UserInfo userInfo) {
         boolean usernameExists = userRepository.existsByUsername(userInfo.getUsername());
-
         if(usernameExists) {
             throw new ForbiddenException(Error.USERNAME_ALREADY_EXISTS.getMessage(), Error.USERNAME_ALREADY_EXISTS.getErrorCode());
         }
@@ -45,9 +41,7 @@ public class RegisterService {
 
     private User createAndSaveUser(UserInfo userInfo) {
         User user = userMapper.toUser(userInfo);
-
         encodePassword(userInfo, user);
-
         user.setRole("user");
         userRepository.save(user);
         return user;

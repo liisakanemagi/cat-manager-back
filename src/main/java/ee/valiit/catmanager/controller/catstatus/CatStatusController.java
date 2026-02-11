@@ -16,6 +16,7 @@ public class CatStatusController {
     private final CatStatusService catStatusService;
 
     @GetMapping("/cat/status")
+    //swagger documentation
 
     public List<CatStatusInfo> getCatStatuses(){
         return catStatusService.getCatStatuses();

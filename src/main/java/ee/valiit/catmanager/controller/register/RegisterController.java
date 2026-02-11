@@ -5,6 +5,7 @@ import ee.valiit.catmanager.infrastructure.error.ApiError;
 import ee.valiit.catmanager.service.RegisterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -25,8 +26,13 @@ public class RegisterController {
     @Operation(summary = "Uue kasutaja registreerimine")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "403", description = "Kasutajanimi on juba olemas (errorCode 113)", content = @Content(schema = @Schema(implementation = ApiError.class))),
-            @ApiResponse(responseCode = "402", description = "Selle emailiga kasutaja on juba registreeritud (errorCode 114)", content = @Content(schema = @Schema(implementation = ApiError.class)))
+            @ApiResponse(responseCode = "403", description = "Registreerimine ebaõnnestus", content = @Content(
+                    schema = @Schema(implementation = ApiError.class),
+                    examples = {
+                            @ExampleObject(name = "UsernameExists", summary = "Kasutajanimi on juba olemas", value = "{\"errorCode\": 113, \"message\": \"Kasutajanimi on juba olemas\"}"),
+                            @ExampleObject(name = "EmailExists", summary = "Selle emailiga kasutaja on juba registreeritud", value = "{\"errorCode\": 114, \"message\": \"Selle emailiga kasutaja on juba registreeritud\"}")
+                    }
+            ))
     })
 
     public Integer register (@RequestBody @Valid UserInfo userInfo){

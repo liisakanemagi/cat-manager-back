@@ -14,9 +14,10 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CatStatusDto implements Serializable {
+public class CatStatusInfo implements Serializable {
     @Size(max = 50)
     private String statusCode;
+
     @NotNull
     @Size(max = 50)
     private String label;

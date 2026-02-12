@@ -18,7 +18,7 @@ public class CatStatusController {
     private final CatStatusService catStatusService;
 
     @GetMapping("/cat/status")
-    @Operation(summary = "Kassi staatuste pärimine", description = "Tagastab nimekirja kõikidest kassi staatustest")
+   @Operation(summary = "Kassistaatuste pärimine", description = "Tagastatakse nimekiri kassistaatustest")
     @ApiResponse(responseCode = "200", description = "OK")
     public List<CatStatusInfo> getCatStatuses(){
         return catStatusService.getCatStatuses();

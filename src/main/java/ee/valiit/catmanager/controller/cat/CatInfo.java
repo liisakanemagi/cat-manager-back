@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Instant;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +22,8 @@ public class CatInfo {
     @Size(max = 20)
     private String status;
 
+    private LocalDate arrivedAt;
+
     private LocalDate birthday;
 
     private BigDecimal weight;
@@ -31,10 +34,14 @@ public class CatInfo {
     @Size(max = 50)
     private String chipNumber;
 
+    @Size(max = 500)
     private String healthInfo;
 
+    @Size(max = 500)
     private String otherInfo;
 
     @Size(max = 255)
     private String imageUrl;
+
+    private Instant createdAt;
 }

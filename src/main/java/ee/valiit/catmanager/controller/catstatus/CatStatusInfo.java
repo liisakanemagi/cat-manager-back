@@ -6,15 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 /**
  * DTO for {@link ee.valiit.catmanager.persistence.catstatus.CatStatus}
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CatStatusInfo implements Serializable {
+public class CatStatusInfo {
     @Size(max = 50)
     private String statusCode;
 

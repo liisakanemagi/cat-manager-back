@@ -14,8 +14,8 @@ public class UserInfo {
     @Size(max = 50)
     private String username;
     @NotNull
-    @Size(max = 255)
+    @Size(max = 50)
     private String password;
-    @Size(max = 100)
+    @Size(max = 50)
     private String email;
 }

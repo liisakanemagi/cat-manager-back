@@ -1,6 +1,8 @@
 package ee.valiit.catmanager.controller.catstatus;
 
 import ee.valiit.catmanager.service.CatStatusService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +18,8 @@ public class CatStatusController {
     private final CatStatusService catStatusService;
 
     @GetMapping("/cat/status")
-    //swagger documentation
-
+    @Operation(summary = "Kassi staatuste pärimine", description = "Tagastab nimekirja kõikidest kassi staatustest")
+    @ApiResponse(responseCode = "200", description = "OK")
     public List<CatStatusInfo> getCatStatuses(){
         return catStatusService.getCatStatuses();
 

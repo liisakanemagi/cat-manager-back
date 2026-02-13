@@ -3,6 +3,7 @@ package ee.valiit.catmanager.service;
 import ee.valiit.catmanager.controller.cat.CatInfo;
 import ee.valiit.catmanager.infrastructure.error.Error;
 import ee.valiit.catmanager.infrastructure.exception.ForbiddenException;
+import ee.valiit.catmanager.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.valiit.catmanager.persistence.cat.Cat;
 import ee.valiit.catmanager.persistence.cat.CatMapper;
 import ee.valiit.catmanager.persistence.cat.CatRepository;
@@ -10,7 +11,6 @@ import ee.valiit.catmanager.persistence.catstatus.CatStatus;
 import ee.valiit.catmanager.persistence.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.View;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +20,6 @@ public class CatService {
     private final CatStatusService catStatusService;
     private final CatMapper catMapper;
     private final CatRepository catRepository;
-    private final View error;
 
     public Cat addCat(CatInfo catInfo, Integer userId) {
         validateCatNameIsAvailableForCurrentUser(catInfo, userId);
@@ -41,5 +40,15 @@ public class CatService {
             throw new ForbiddenException(Error.CAT_NAME_UNAVAILABLE.getMessage(), Error.CAT_NAME_UNAVAILABLE.getErrorCode());
         }
     }
+
+    public Cat getValidCat(Integer catId){
+        return catRepository.findById(catId)
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("catId", catId));
+    }
+
+    public void deleteCat(Integer catId) {
+        Cat cat = this.getValidCat(catId);
+    }
 }
+
 

@@ -1,6 +1,7 @@
 package ee.valiit.catmanager.controller.cat;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,8 +20,8 @@ public class CatInfo {
     private String name;
 
     @NotNull
-    @Size(max = 20)
-    private String status;
+    @Positive
+    private Integer statusId;
 
     private LocalDate arrivedAt;
 

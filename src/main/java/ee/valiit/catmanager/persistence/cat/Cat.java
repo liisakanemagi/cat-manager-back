@@ -1,5 +1,6 @@
 package ee.valiit.catmanager.persistence.cat;
 
+import ee.valiit.catmanager.persistence.catstatus.CatStatus;
 import ee.valiit.catmanager.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -25,10 +26,10 @@ public class Cat {
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @Size(max = 20)
     @NotNull
-    @Column(name = "status", nullable = false, length = 20)
-    private String status;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "status_id", nullable = false)
+    private CatStatus status;
 
     @Column(name = "birthday")
     private LocalDate birthday;

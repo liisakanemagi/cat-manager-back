@@ -48,6 +48,8 @@ public class CatService {
 
     public void deleteCat(Integer catId) {
         Cat cat = this.getValidCat(catId);
+        catRepository.delete(cat);
+
     }
 }
 

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CatStatusInfo {
     @Size(max = 50)
-    private String statusCode;
+    private String id;
 
     @NotNull
     @Size(max = 50)

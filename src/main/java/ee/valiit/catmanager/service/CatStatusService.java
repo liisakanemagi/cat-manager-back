@@ -23,10 +23,10 @@ public class CatStatusService {
     }
 
     public CatStatus getValidCatStatus(Integer statusId){
-       CatStatus catStatus = catStatusRepository.findById(statusId)
-               .orElseThrow(() -> new PrimaryKeyNotFoundException("statusId", statusId));
-       return catStatus;
+        return catStatusRepository.findById(statusId)
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("statusId", statusId));
     }
 }
+
 
 

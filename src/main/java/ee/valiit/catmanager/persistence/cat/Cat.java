@@ -31,6 +31,9 @@ public class Cat {
     @JoinColumn(name = "status_id", nullable = false)
     private CatStatus status;
 
+    @Column (name = "arrived_at")
+    private LocalDate arrivedAt;
+
     @Column(name = "birthday")
     private LocalDate birthday;
 

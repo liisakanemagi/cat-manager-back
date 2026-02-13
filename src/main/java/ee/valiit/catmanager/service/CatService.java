@@ -10,6 +10,7 @@ import ee.valiit.catmanager.persistence.catstatus.CatStatus;
 import ee.valiit.catmanager.persistence.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.View;
 
 @Service
 @RequiredArgsConstructor
@@ -19,12 +20,10 @@ public class CatService {
     private final CatStatusService catStatusService;
     private final CatMapper catMapper;
     private final CatRepository catRepository;
+    private final View error;
 
     public Cat addCat(CatInfo catInfo, Integer userId) {
-        boolean catExists = catRepository.catExistsBy(userId, catInfo.getName());
-        if (catExists) {
-            throw new ForbiddenException(Error.CAT_NAME_UNAVAILABLE.getMessage(), Error.CAT_NAME_UNAVAILABLE.getErrorCode());
-        }
+        validateCatNameIsAvailableForCurrentUser(catInfo, userId);
 
         User user = userService.getValidUser(userId);
         CatStatus catStatus = catStatusService.getValidCatStatus(catInfo.getStatusId());
@@ -35,4 +34,12 @@ public class CatService {
         catRepository.save(cat);
         return cat;
     }
+
+    private void validateCatNameIsAvailableForCurrentUser(CatInfo catInfo, Integer userId) {
+        boolean catExists = catRepository.catExistsBy(userId, catInfo.getName());
+        if (catExists) {
+            throw new ForbiddenException(Error.CAT_NAME_UNAVAILABLE.getMessage(), Error.CAT_NAME_UNAVAILABLE.getErrorCode());
+        }
+    }
 }
+

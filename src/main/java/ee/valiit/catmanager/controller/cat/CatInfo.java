@@ -1,5 +1,6 @@
 package ee.valiit.catmanager.controller.cat;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -8,8 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -44,5 +45,6 @@ public class CatInfo {
     @Size(max = 255)
     private String imageUrl;
 
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Instant createdAt;
 }

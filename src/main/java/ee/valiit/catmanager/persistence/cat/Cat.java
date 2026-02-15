@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Getter
@@ -57,6 +58,9 @@ public class Cat {
     @Size(max = 255)
     @Column(name = "image_url")
     private String imageUrl;
+
+    @Column(name = "created_at", insertable = false, updatable = false)
+    private Instant createdAt;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

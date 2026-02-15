@@ -1,4 +1,4 @@
-package ee.valiit.catmanager.infrastructure.exception;
+package ee.valiit.catmanager.infrastructure.util;
 
 
 import ee.valiit.catmanager.infrastructure.error.ApiError;

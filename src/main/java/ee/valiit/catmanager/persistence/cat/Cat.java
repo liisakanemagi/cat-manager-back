@@ -55,9 +55,9 @@ public class Cat {
     @Column(name = "other_info", length = Integer.MAX_VALUE)
     private String otherInfo;
 
-    @Size(max = 255)
-    @Column(name = "image_url")
-    private String imageUrl;
+    @NotNull
+    @Column(name = "image_data", nullable = false)
+    private byte[] imageData;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private Instant createdAt;

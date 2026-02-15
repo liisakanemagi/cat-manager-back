@@ -42,8 +42,8 @@ public class CatInfo {
     @Size(max = 500)
     private String otherInfo;
 
-    @Size(max = 255)
-    private String imageUrl;
+    @Size(max = 10485760) // 10MB
+    private String imageData;
 
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Instant createdAt;

@@ -16,7 +16,7 @@ public class CatStatusController {
 
     private final CatStatusService catStatusService;
 
-    @GetMapping("/cat/status")
+    @GetMapping("/cat/statuses")
    @Operation(summary = "Kassistaatuste pärimine", description = "Tagastatakse nimekiri kassistaatustest")
     public List<CatStatusInfo> getCatStatuses(){
         return catStatusService.getCatStatuses();

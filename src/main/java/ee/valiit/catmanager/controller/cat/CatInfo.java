@@ -28,12 +28,13 @@ public class CatInfo {
 
     private LocalDate birthday;
 
+    @Positive
     private BigDecimal weight;
 
     @Size(max = 10)
     private String sex;
 
-    @Size(max = 50)
+    @Size(max = 15)
     private String chipNumber;
 
     @Size(max = 500)

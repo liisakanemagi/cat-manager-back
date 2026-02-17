@@ -4,6 +4,8 @@ import ee.valiit.catmanager.persistence.catstatus.CatStatus;
 import ee.valiit.catmanager.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +40,7 @@ public class Cat {
     @Column(name = "birthday")
     private LocalDate birthday;
 
+    @Positive
     @Column(name = "weight", precision = 4, scale = 2)
     private BigDecimal weight;
 
@@ -45,8 +48,9 @@ public class Cat {
     @Column(name = "sex", length = 10)
     private String sex;
 
-    @Size(max = 50)
-    @Column(name = "chip_number", length = 50)
+
+    @Pattern(regexp = "^[0-9]{15}$")
+    @Column(name = "chip_number", length = 20)
     private String chipNumber;
 
     @Column(name = "health_info", length = Integer.MAX_VALUE)

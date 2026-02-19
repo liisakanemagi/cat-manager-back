@@ -28,9 +28,9 @@ public class CatInfo {
 
     private LocalDate birthday;
 
-    @Positive
     private BigDecimal weight;
 
+    @NotNull
     @Size(max = 10)
     private String sex;
 

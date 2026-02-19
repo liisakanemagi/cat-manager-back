@@ -54,7 +54,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Arenduse ajal võid lubada kõik päritolud. Produktsioonis tuleks siia panna konkreetsed domeenid (nt sinu front-endi aadress)
+       //Produktsioonis tuleks siia panna konkreetsed domeenid
         configuration.setAllowedOriginPatterns(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));

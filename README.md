@@ -14,7 +14,7 @@ To run this backend locally, please follow these steps:
 
 ### 1. Database Setup
 Ensure you have **PostgreSQL** installed and running.
-1. Create a new database named `bmx`.
+1. Create a new database named `cat`.
 2. Check `src/main/resources/application.properties` and update the `username` and `password` to match your local PostgreSQL credentials if necessary.
 
 ### 2. Run the Application

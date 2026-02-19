@@ -20,6 +20,6 @@ Ensure you have **PostgreSQL** installed and running.
 ### 2. Run the Application
 1. Open the project in your IDE (IntelliJ IDEA is recommended).
 2. Allow Maven/Gradle to import dependencies.
-3. Run the main class `BmxApplication.java`.
+3. Run the main class `CatManagerApplication.java`.
 4. The API will start at `http://localhost:8081`.
 

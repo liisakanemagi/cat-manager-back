@@ -23,6 +23,3 @@ Ensure you have **PostgreSQL** installed and running.
 3. Run the main class `BmxApplication.java`.
 4. The API will start at `http://localhost:8081`.
 
-## Known Issues (Backend)
-* **Missing Seed Images:** The initial database script does not contain binary image data for pre-seeded locations (assets are local-only). Note: Image upload for new spots works correctly.
-* **Security:** User passwords are currently stored without encryption for educational simplicity.

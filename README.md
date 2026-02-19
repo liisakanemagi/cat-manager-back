@@ -14,15 +14,12 @@ To run this backend locally, please follow these steps:
 
 ### 1. Database Setup
 Ensure you have **PostgreSQL** installed and running.
-1. Create a new database named `bmx`.
+1. Create a new database named `cat`.
 2. Check `src/main/resources/application.properties` and update the `username` and `password` to match your local PostgreSQL credentials if necessary.
 
 ### 2. Run the Application
 1. Open the project in your IDE (IntelliJ IDEA is recommended).
 2. Allow Maven/Gradle to import dependencies.
-3. Run the main class `BmxApplication.java`.
+3. Run the main class `CatManagerApplication.java`.
 4. The API will start at `http://localhost:8081`.
 
-## Known Issues (Backend)
-* **Missing Seed Images:** The initial database script does not contain binary image data for pre-seeded locations (assets are local-only). Note: Image upload for new spots works correctly.
-* **Security:** User passwords are currently stored without encryption for educational simplicity.

@@ -1,5 +1,6 @@
 package ee.valiit.catmanager.service;
 
+import ee.valiit.catmanager.controller.cat.CatDto;
 import ee.valiit.catmanager.controller.cat.CatInfo;
 import ee.valiit.catmanager.infrastructure.error.Error;
 import ee.valiit.catmanager.infrastructure.exception.ForbiddenException;
@@ -37,12 +38,11 @@ public class CatService {
         return cat;
     }
 
-    public List<CatInfo> getCats(Integer userId) {
+    public List<CatDto> getCats(Integer userId) {
         Sort sort = Sort.by(Sort.DEFAULT_DIRECTION, "name");
         List<Cat> cats = catRepository.findByUserId(userId, sort);
-        return catMapper.toCatInfos(cats);
+        return catMapper.toCatDtos(cats);
     }
-
 
     private void validateCatNameIsAvailableForCurrentUser(CatInfo catInfo, Integer userId) {
         boolean catExists = catRepository.existsByUserIdAndName(userId, catInfo.getName());

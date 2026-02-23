@@ -1,5 +1,6 @@
 package ee.valiit.catmanager.persistence.cat;
 
+import ee.valiit.catmanager.controller.cat.CatDto;
 import ee.valiit.catmanager.controller.cat.CatInfo;
 import ee.valiit.catmanager.infrastructure.util.ImageConverter;
 import org.mapstruct.*;
@@ -15,5 +16,8 @@ public interface CatMapper {
     @Mapping(target = "imageData", source = "imageData")
     CatInfo toCatInfo(Cat cat);
 
-    List<CatInfo> toCatInfos (List<Cat> cats);
+    @Mapping(target = "imageData", source = "imageData")
+    CatDto toCatDto(Cat cat);
+
+    List<CatDto> toCatDtos(List<Cat> cats);
 }

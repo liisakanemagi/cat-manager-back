@@ -40,12 +40,12 @@ public class CatController {
     @GetMapping("/cats")
     @Operation(summary = "Toob ära nimekirja kasutaja lisatud kassidest")
 
-    public List<CatInfo> getCats (){
+    public List<CatDto> getCats(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
         return catService.getCats(user.getId());
-    }
 
+    }
 
     @DeleteMapping("/cat")
     @Operation(summary= "Kassi kustutamine")

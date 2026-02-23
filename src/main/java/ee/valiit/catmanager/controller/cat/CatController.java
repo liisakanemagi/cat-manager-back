@@ -16,6 +16,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @SecurityRequirement(name = "Bearer Authentication")
@@ -34,6 +36,16 @@ public class CatController {
         User user = (User) authentication.getPrincipal();
         return catService.addCat(catInfo, user.getId());
     }
+
+    @GetMapping("/cats")
+    @Operation(summary = "Toob ära nimekirja kasutaja lisatud kassidest")
+
+    public List<CatInfo> getCats (){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        return catService.getCats(user.getId());
+    }
+
 
     @DeleteMapping("/cat")
     @Operation(summary= "Kassi kustutamine")

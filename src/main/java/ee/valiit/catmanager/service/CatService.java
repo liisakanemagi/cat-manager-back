@@ -10,7 +10,10 @@ import ee.valiit.catmanager.persistence.cat.CatRepository;
 import ee.valiit.catmanager.persistence.catstatus.CatStatus;
 import ee.valiit.catmanager.persistence.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -34,14 +37,21 @@ public class CatService {
         return cat;
     }
 
+    public List<CatInfo> getCats(Integer userId) {
+        Sort sort = Sort.by(Sort.DEFAULT_DIRECTION, "name");
+        List<Cat> cats = catRepository.findByUserId(userId, sort);
+        return catMapper.toCatInfos(cats);
+    }
+
+
     private void validateCatNameIsAvailableForCurrentUser(CatInfo catInfo, Integer userId) {
-        boolean catExists = catRepository.catExistsBy(userId, catInfo.getName());
+        boolean catExists = catRepository.existsByUserIdAndName(userId, catInfo.getName());
         if (catExists) {
             throw new ForbiddenException(Error.CAT_NAME_UNAVAILABLE.getMessage(), Error.CAT_NAME_UNAVAILABLE.getErrorCode());
         }
     }
 
-    public Cat getValidCat(Integer catId){
+    public Cat getValidCat(Integer catId) {
         return catRepository.findById(catId)
                 .orElseThrow(() -> new PrimaryKeyNotFoundException("catId", catId));
     }

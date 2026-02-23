@@ -4,6 +4,8 @@ import ee.valiit.catmanager.controller.cat.CatInfo;
 import ee.valiit.catmanager.infrastructure.util.ImageConverter;
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = ImageConverter.class)
 public interface CatMapper {
     @Mapping(target = "createdAt", ignore = true)
@@ -12,4 +14,6 @@ public interface CatMapper {
 
     @Mapping(target = "imageData", source = "imageData")
     CatInfo toCatInfo(Cat cat);
+
+    List<CatInfo> toCatInfos (List<Cat> cats);
 }

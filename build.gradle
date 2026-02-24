@@ -39,10 +39,6 @@ dependencies {
     // PostgreSQL (lisatud selge versioon)
     runtimeOnly 'org.postgresql:postgresql:42.7.3'
 
-    // MapStruct - Already at latest version
-    implementation 'org.mapstruct:mapstruct:1.6.3'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
-
     // SQL with parameter values
     implementation 'p6spy:p6spy:3.9.1'
 
@@ -50,11 +46,6 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-}
-
-compileJava {
-    // Ignoring Unmapped Properties (no error, no warning), Inject Spring Components into the Mapper
-    options.compilerArgs += ['-Amapstruct.unmappedTargetPolicy=IGNORE', '-Amapstruct.defaultComponentModel=spring']
 }
 
 tasks.named('test') {

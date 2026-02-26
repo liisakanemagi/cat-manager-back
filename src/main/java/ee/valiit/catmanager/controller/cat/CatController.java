@@ -47,13 +47,13 @@ public class CatController {
 
     }
     
-    @GetMapping("/cat")
+    @GetMapping("/cat/{catId}")
     @Operation(summary = "Toob ära ühe kassi andmed")
     
-    public void getCat() {
+    public CatDto getCat(@PathVariable Integer catId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-        catService.getCat(user.getId());
+        return catService.getCat(catId, user.getId());
 
     }
 

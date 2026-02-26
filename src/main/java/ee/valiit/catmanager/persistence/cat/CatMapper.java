@@ -17,9 +17,6 @@ public interface CatMapper {
     Cat toCat(CatInfo catInfo);
 
     @Mapping(target = "imageData", source = "imageData")
-    CatInfo toCatInfo(Cat cat);
-
-    @Mapping(target = "imageData", source = "imageData")
     CatDto toCatDto(Cat cat);
 
     List<CatDto> toCatDtos(List<Cat> cats);

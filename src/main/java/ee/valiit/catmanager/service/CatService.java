@@ -44,12 +44,14 @@ public class CatService {
         return catMapper.toCatDtos(cats);
     }
     
-    public void getCat(Integer userId){
-        
+    public CatDto getCat(Integer catId, Integer userId){
+        Cat cat = getValidCat(catId, userId);
+        return catMapper.toCatDto(cat);
     }
 
     private void validateCatNameIsAvailableForCurrentUser(CatInfo catInfo, Integer userId) {
         boolean catExists = catRepository.existsByUserIdAndName(userId, catInfo.getName());
+
         if (catExists) {
             throw new ForbiddenException(Error.CAT_NAME_UNAVAILABLE.getMessage(), Error.CAT_NAME_UNAVAILABLE.getErrorCode());
         }

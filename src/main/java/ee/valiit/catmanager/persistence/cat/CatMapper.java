@@ -3,7 +3,10 @@ package ee.valiit.catmanager.persistence.cat;
 import ee.valiit.catmanager.controller.cat.CatDto;
 import ee.valiit.catmanager.controller.cat.CatInfo;
 import ee.valiit.catmanager.infrastructure.util.ImageConverter;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 

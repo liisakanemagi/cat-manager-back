@@ -14,4 +14,11 @@ public class PrimaryKeyNotFoundException extends RuntimeException {
         this.message = "Ei leidnud primary keyd '" + fieldName + "' väärtusega: " + fieldValue;
         this.errorCode = 777;
     }
+
+
+    public PrimaryKeyNotFoundException(String message) {
+        super(message);
+        this.message = message;
+        this.errorCode = 777;
+    }
 }

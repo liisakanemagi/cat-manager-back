@@ -43,6 +43,10 @@ public class CatService {
         List<Cat> cats = catRepository.findByUserId(userId, sort);
         return catMapper.toCatDtos(cats);
     }
+    
+    public void getCat(Integer userId){
+        
+    }
 
     private void validateCatNameIsAvailableForCurrentUser(CatInfo catInfo, Integer userId) {
         boolean catExists = catRepository.existsByUserIdAndName(userId, catInfo.getName());
@@ -51,16 +55,14 @@ public class CatService {
         }
     }
 
-    public Cat getValidCat(Integer catId) {
-        return catRepository.findById(catId)
-                .orElseThrow(() -> new PrimaryKeyNotFoundException("catId", catId));
+    public Cat getValidCat(Integer catId, Integer userId) {
+        return catRepository.findByIdAndUserId(catId, userId)
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("Kassi ID " + catId + " kasutaja ID-ga " + userId + " ei leitud."));
     }
 
-    public void deleteCat(Integer catId) {
-        Cat cat = this.getValidCat(catId);
+    public void deleteCat(Integer catId, Integer userId) {
+        Cat cat = this.getValidCat(catId, userId);
         catRepository.delete(cat);
 
     }
 }
-
-

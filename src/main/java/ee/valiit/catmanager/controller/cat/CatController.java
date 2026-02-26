@@ -46,10 +46,22 @@ public class CatController {
         return catService.getCats(user.getId());
 
     }
+    
+    @GetMapping("/cat")
+    @Operation(summary = "Toob ära ühe kassi andmed")
+    
+    public void getCat() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        catService.getCat(user.getId());
 
-    @DeleteMapping("/cat")
+    }
+
+    @DeleteMapping("/cat/{catId}")
     @Operation(summary= "Kassi kustutamine")
-    public void deleteCat(@RequestParam Integer catId) {
-        catService.deleteCat(catId);
+    public void deleteCat(@PathVariable Integer catId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        catService.deleteCat(catId, user.getId());
     }
 }

@@ -32,18 +32,16 @@ public class CatController {
             @ApiResponse(responseCode = "403", description = "Oled selle nimega kassi juba lisanud (errorCode 115)", content = @Content(schema = @Schema(implementation = ApiError.class)))})
 
     public Cat addCat(@RequestBody @Valid CatInfo catInfo) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        return catService.addCat(catInfo, user.getId());
+        Integer userId = getAuthenticatedUserId();
+        return catService.addCat(catInfo, userId);
     }
 
     @GetMapping("/cats")
     @Operation(summary = "Toob ära nimekirja kasutaja lisatud kassidest")
 
     public List<CatDto> getCats(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        return catService.getCats(user.getId());
+        Integer userId = getAuthenticatedUserId();
+        return catService.getCats(userId);
 
     }
     
@@ -51,17 +49,29 @@ public class CatController {
     @Operation(summary = "Toob ära ühe kassi andmed")
     
     public CatDto getCat(@PathVariable Integer catId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        return catService.getCat(catId, user.getId());
+        Integer userId = getAuthenticatedUserId();
+        return catService.getCat(catId, userId);
 
+    }
+
+    @PutMapping("/cat/{catId}")
+    @Operation(summary = "Muudab kassi andmeid")
+
+    public void updateCat(@PathVariable Integer catId){
+        Integer userId = getAuthenticatedUserId();
+        // TODO: Implement catService.updateCat(catId, userId);
     }
 
     @DeleteMapping("/cat/{catId}")
     @Operation(summary= "Kassi kustutamine")
     public void deleteCat(@PathVariable Integer catId) {
+        Integer userId = getAuthenticatedUserId();
+        catService.deleteCat(catId, userId);
+    }
+
+    private Integer getAuthenticatedUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
-        catService.deleteCat(catId, user.getId());
+        return user.getId();
     }
 }

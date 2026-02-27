@@ -57,13 +57,13 @@ public class CatController {
     @PutMapping("/cat/{catId}")
     @Operation(summary = "Muudab kassi andmeid")
 
-    public void updateCat(@PathVariable Integer catId){
+    public void updateCat(@PathVariable Integer catId, @RequestBody CatInfo catInfo){
         Integer userId = getAuthenticatedUserId();
-        // TODO: Implement catService.updateCat(catId, userId);
+        catService.updateCat(catId, catInfo, userId);
     }
 
     @DeleteMapping("/cat/{catId}")
-    @Operation(summary= "Kassi kustutamine")
+    @Operation(summary= "Kustutab kassi")
     public void deleteCat(@PathVariable Integer catId) {
         Integer userId = getAuthenticatedUserId();
         catService.deleteCat(catId, userId);

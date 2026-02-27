@@ -12,4 +12,5 @@ public interface CatStatusMapper {
 
     List<CatStatusInfo> toCatStatusInfos(List<CatStatus> catStatuses);
 
+
 }

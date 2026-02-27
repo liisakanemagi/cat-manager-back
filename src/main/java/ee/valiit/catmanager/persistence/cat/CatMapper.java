@@ -3,10 +3,7 @@ package ee.valiit.catmanager.persistence.cat;
 import ee.valiit.catmanager.controller.cat.CatDto;
 import ee.valiit.catmanager.controller.cat.CatInfo;
 import ee.valiit.catmanager.infrastructure.util.ImageConverter;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -20,4 +17,6 @@ public interface CatMapper {
     CatDto toCatDto(Cat cat);
 
     List<CatDto> toCatDtos(List<Cat> cats);
+
+    void updateCat(CatInfo catInfo, @MappingTarget Cat cat);
 }

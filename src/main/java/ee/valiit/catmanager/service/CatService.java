@@ -9,6 +9,7 @@ import ee.valiit.catmanager.persistence.cat.Cat;
 import ee.valiit.catmanager.persistence.cat.CatMapper;
 import ee.valiit.catmanager.persistence.cat.CatRepository;
 import ee.valiit.catmanager.persistence.catstatus.CatStatus;
+import ee.valiit.catmanager.persistence.catstatus.CatStatusMapper;
 import ee.valiit.catmanager.persistence.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -24,6 +25,7 @@ public class CatService {
     private final CatStatusService catStatusService;
     private final CatMapper catMapper;
     private final CatRepository catRepository;
+    private final CatStatusMapper catStatusMapper;
 
     public Cat addCat(CatInfo catInfo, Integer userId) {
         validateCatNameIsAvailableForCurrentUser(catInfo, userId);
@@ -43,10 +45,38 @@ public class CatService {
         List<Cat> cats = catRepository.findByUserId(userId, sort);
         return catMapper.toCatDtos(cats);
     }
-    
-    public CatDto getCat(Integer catId, Integer userId){
+
+    public CatDto getCat(Integer catId, Integer userId) {
         Cat cat = getValidCat(catId, userId);
         return catMapper.toCatDto(cat);
+    }
+
+
+    public Cat getValidCat(Integer catId, Integer userId) {
+        return catRepository.findByIdAndUserId(catId, userId)
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("Kassi ID " + catId + " kasutaja ID-ga " + userId + " ei leitud."));
+    }
+
+    public void updateCat(Integer catId, CatInfo catInfo, Integer userId) {
+
+        Cat cat = getValidCat(catId, userId);
+
+        if (!cat.getName().equals(catInfo.getName())) {
+            validateCatNameIsAvailableForCurrentUser(catInfo, userId);
+        }
+
+        CatStatus catStatus = catStatusService.getValidCatStatus(catInfo.getStatusId());
+
+        catMapper.updateCat(catInfo, cat);
+        cat.setStatus(catStatus);
+        catRepository.save(cat);
+
+    }
+
+    public void deleteCat(Integer catId, Integer userId) {
+        Cat cat = getValidCat(catId, userId);
+        catRepository.delete(cat);
+
     }
 
     private void validateCatNameIsAvailableForCurrentUser(CatInfo catInfo, Integer userId) {
@@ -57,14 +87,4 @@ public class CatService {
         }
     }
 
-    public Cat getValidCat(Integer catId, Integer userId) {
-        return catRepository.findByIdAndUserId(catId, userId)
-                .orElseThrow(() -> new PrimaryKeyNotFoundException("Kassi ID " + catId + " kasutaja ID-ga " + userId + " ei leitud."));
-    }
-
-    public void deleteCat(Integer catId, Integer userId) {
-        Cat cat = this.getValidCat(catId, userId);
-        catRepository.delete(cat);
-
-    }
 }
